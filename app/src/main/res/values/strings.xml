@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Chat App Java</string>
+    <string name="input_your_email">Введите ваш email</string>
+    <string name="input_your_password">Введите ваш пароль</string>
+    <string name="i_already_have_an_account">У меня уже есть аккаунт</string>
+    <string name="logo">Логотип</string>
+    <string name="register">Регистрация</string>
+    <string name="login">Вход</string>
+    <string name="message_dont_send">Сообщение не отправлено</string>
+    <string name="sign_out">Выйти</string>
+</resources>

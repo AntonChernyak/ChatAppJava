@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "711136026910",
+    "project_id": "chat-app-java-2fcae",
+    "storage_bucket": "chat-app-java-2fcae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711136026910:android:7235de1173a194b1cce90f",
+        "android_client_info": {
+          "package_name": "ru.educationalwork.chatappjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711136026910-1ah9a9tsh9cu320kv11tetcc6fmanmns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.educationalwork.chatappjava",
+            "certificate_hash": "fc0a3707ee3296257017b84ae5877b93c82db342"
+          }
+        },
+        {
+          "client_id": "711136026910-e75qrlrleaj3iji2m1su8mju4nau8q1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ30bWxjJxDHrXDuFtoSgRPnK37caDHVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711136026910-e75qrlrleaj3iji2m1su8mju4nau8q1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
