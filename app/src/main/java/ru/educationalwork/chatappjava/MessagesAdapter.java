@@ -3,10 +3,13 @@ package ru.educationalwork.chatappjava;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +41,20 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @Override
     public void onBindViewHolder(@NonNull MessagesViewHolder holder, int position) {
         Message message = messageList.get(position);
-        holder.textViewAuthor.setText(message.getAuthor());
-        holder.textViewMessage.setText(message.getTextOfMessage());
+        String author = message.getAuthor();
+        String textOfMessage = message.getTextOfMessage();
+        String urlToMessage = message.getImageUrl();
+
+        holder.textViewAuthor.setText(author);
+        if (textOfMessage != null && !textOfMessage.isEmpty()) {
+            holder.textViewMessage.setText(textOfMessage);
+            holder.imageViewImage.setVisibility(View.GONE);
+        }
+
+        if (urlToMessage != null && !urlToMessage.isEmpty()){
+            holder.imageViewImage.setVisibility(View.VISIBLE);
+            Picasso.get().load(urlToMessage).into(holder.imageViewImage);
+        }
     }
 
     @Override
@@ -52,12 +67,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         private TextView textViewAuthor;
         private TextView textViewMessage;
+        private ImageView imageViewImage;
 
         public MessagesViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewAuthor = itemView.findViewById(R.id.textViewAuthor);
             textViewMessage = itemView.findViewById(R.id.textViewMessage);
+            imageViewImage = itemView.findViewById(R.id.imadeViewImage);
         }
     }
 }
