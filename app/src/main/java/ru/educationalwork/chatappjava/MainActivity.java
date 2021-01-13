@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference reference;
 
-    private String author;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -64,15 +68,13 @@ public class MainActivity extends AppCompatActivity {
         reference = storage.getReference(); // ссылка на общее хранилище
 
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
-        messagesAdapter = new MessagesAdapter();
+        messagesAdapter = new MessagesAdapter(this);
         editTextMessage = findViewById(R.id.editTextMessage);
         imageViewSendMessage = findViewById(R.id.imageViewSendMessage);
         imageViewAddImage = findViewById(R.id.imageViewAddImage);
 
         recyclerViewMessages.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewMessages.setAdapter(messagesAdapter);
-
-        author = "Anton";
 
         imageViewSendMessage.setOnClickListener(v -> sendMessage(editTextMessage.getText().toString().trim(), null));
         imageViewAddImage.setOnClickListener(v -> {
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String textOfMessage, String urlToImage) {
-
+        String author = preferences.getString("author", "Аноним");
         Message message = null;
         if (textOfMessage != null && !textOfMessage.isEmpty()) {
             message = new Message(author, textOfMessage, System.currentTimeMillis(), null);
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null)
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Toast.makeText(this, "Logged", Toast.LENGTH_SHORT).show();
+            preferences.edit().putString("author", mAuth.getCurrentUser().getEmail()).apply();
         } else {
             signOutAction();
         }
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
                     Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
-                    author = user.getEmail();
+                    preferences.edit().putString("author", user.getEmail()).apply();
                 }
             } else {
                 // Sign in failed. If response is null the user canceled the
