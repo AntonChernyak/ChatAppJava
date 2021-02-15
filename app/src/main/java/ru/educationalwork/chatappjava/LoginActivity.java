@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
- * Коммент для sourceTree №"2
+ * Коммент для sourceTree №"3 === testFlow
  */
 public class LoginActivity extends AppCompatActivity {
 
