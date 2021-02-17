@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String textOfMessage, String urlToImage) {
-        String author = preferences.getString("author", "Аноним");
+        String author = preferences.getString("author", "Аноним!");
         Message message = null;
         if (textOfMessage != null && !textOfMessage.isEmpty()) {
             message = new Message(author, textOfMessage, System.currentTimeMillis(), null);
